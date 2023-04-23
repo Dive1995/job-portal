@@ -1,0 +1,35 @@
+.job{
+    background-color: rgb(123, 166, 203);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.job-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.job-location{
+    font-size: 15px;
+}
+
+.job-posted{
+    font-size: 11px;
+    color: #333;
+    text-align: right;
+}
+
+.tags{
+    list-style-type: none;
+    display: flex;
+}
+
+.tags li{
+    padding:5px 8px;
+    margin-right: 5px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    min-width: 50px;
+    text-align: center;
+}

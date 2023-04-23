@@ -1,0 +1,38 @@
+nav{
+    background-color: antiquewhite;
+    padding: 10px;
+}
+
+.main-container{
+    background-color: aliceblue;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+
+}
+
+.sidebar{
+    padding: 10px;
+    background-color: azure;
+}
+
+.joblist{
+    background-color: bisque;
+    padding: 10px;
+    max-width: 100%;
+    overflow-y: auto;
+}
+
+.jobview{
+    padding: 10px;
+    background-color:burlywood;
+    overflow-y: auto;
+    border: 1px solid #333;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+/* core */
+.sidebar ul{
+    list-style-type: none;
+}

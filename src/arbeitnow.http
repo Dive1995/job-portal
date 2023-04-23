@@ -1,0 +1,9 @@
+https://www.arbeitnow.com/api/job-board-api?page=1&search=&sort_by=relevance&category=&tags=%5B%22visa+sponsorship%22%5D&locale=en
+
+
+GET https://www.arbeitnow.com/api/companies/flink
+
+
+
+
+GET https://www.arbeitnow.com/view/junior-data-operations-specialist-flink-berlin-402095

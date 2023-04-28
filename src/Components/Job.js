@@ -2,9 +2,9 @@ import React from 'react'
 import moment from 'moment'
 import './Job.css'
 
-function Job({company, title, remote, location, tags, posted, types, url}) {
+function Job({company, title, remote, location, tags, posted, types, url, selectJob}) {
   return (
-    <div className='job' key={posted*1000}>
+    <div onClick={selectJob} className='job' key={posted*1000}>
         <p className='job-title'>{title}</p>
         <ul className='tags'>
             {types?.map(type => {

@@ -1,10 +1,11 @@
 nav{
-    background-color: antiquewhite;
+    background-color: #b5e2fa;
     padding: 10px;
+    /* box-shadow: 2px 3px 5px rgba(0,0,0,0.5); */
 }
 
 .main-container{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 2fr 3fr;
@@ -13,11 +14,15 @@ nav{
 
 .sidebar{
     padding: 10px;
-    background-color: azure;
+    /* background-color: #f7ede2; */
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+    /* box-shadow: 1px 1px 5px rgba(0,0,0,0.5); */
 }
 
 .joblist{
-    background-color: bisque;
+    /* background-color: bisque; */
     padding: 10px;
     max-width: 100%;
     overflow-y: auto;
@@ -25,14 +30,24 @@ nav{
 
 .jobview{
     padding: 10px;
-    background-color:burlywood;
+    /* background-color:#f7ede2; */
     overflow-y: auto;
-    border: 1px solid #333;
+    border: 1px solid #d0d0d0;
     border-radius: 10px;
     margin: 10px;
+    /* box-shadow: 3px 5px 5px rgba(0,0,0,0.5); */
 }
 
 /* core */
 .sidebar ul{
     list-style-type: none;
+}
+
+.tag-list li{
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.tag-list li:hover{
+    color: aquamarine;
 }

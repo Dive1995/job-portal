@@ -1,8 +1,15 @@
 .job{
-    background-color: rgb(123, 166, 203);
+    /* background-color: #a3cef1; */
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+    /* box-shadow: 3px 5px 5px rgba(0,0,0,0.5); */
+    border: 1px solid #d0d0d0;
+}
+
+.job:hover{
+    cursor: pointer;
+    border: 1px solid #333;
 }
 
 .job-title{
@@ -25,10 +32,15 @@
     display: flex;
 }
 
+.tags{
+    padding: 0;
+}
+
 .tags li{
+    font-size: 13px;
     padding:5px 8px;
     margin-right: 5px;
-    background-color: aliceblue;
+    background-color: #f4edea;
     border-radius: 20px;
     min-width: 50px;
     text-align: center;

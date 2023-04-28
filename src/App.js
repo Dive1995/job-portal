@@ -1,55 +1,86 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Job from './Components/Job';
+import Nav from './Components/Nav';
+import Sidebar from './Components/Sidebar';
+import JobView from './Components/JobView';
 
 function App() {
   const [jobs, setJobs] = useState([]);
+  const [filters, setFilters] = useState(['english speaking']);
+  const [tags, setTags] = useState([{name:'java', selected: false}, {name:'javascript', selected: false}, {name:'react', selected: false}, {name:'junior', selected: false},{name:'intern', selected: false},{name:'freelance', selected: false},{name:'remote', selected: false}]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchString, setSearchString] = useState('');
+  const [selectedJob, setSelectedJob] = useState();
 
   useEffect(() => {
-    getJobs();
-  }, []);
+    filterJobsByTags();
+  }, [filters]);
 
-  const getJobs = async () => {    
-    const response = await fetch('https://www.arbeitnow.com/api/job-board-api?page=1&search=&sort_by=relevance&category=&tags=%5B%22visa+sponsorship%22%5D&locale=en');
-    const jobList = await response.json();
-    console.log(jobList);    
-    setJobs(jobList.data);
+  const addOrRemoveItemToFilter = (tag) => {
+    setIsLoading(true);
+    var index = filters.indexOf(tag.name);
+
+    if(index < 0 ){
+      updateTagsArray(tag);
+      setFilters([...filters, tag.name]);
+    }else{
+      var newFilter = filters.filter(item => item !== tag.name)
+      updateTagsArray(tag);
+      setFilters(newFilter);
+    }
+  }
+
+  const updateTagsArray = (tag) => {
+    var updatedTags = tags.map(tagItem => {
+      if(tagItem.name === tag.name){
+        return {...tag, selected: !tag.selected}
+      }else{
+        return tagItem;
+      }
+    });
+
+    setTags(updatedTags);
+  }
+  
+  const filterJobsByTags = async () => {
+    var string = "";
+
+    filters.forEach(tag => {
+      if(tag.includes(" ")){
+        tag = tag.replace(" ", "+")
+      }
+      string += `%2C%22${tag}%22`;
+    });
+
+    var text = searchString.replaceAll(',', '%2C');    
+    var updatedtext = text.replaceAll(' ', '+')
+    // console.log(searchString)
+    // console.log(updatedtext)
+    
+    const response = await fetch(`https://www.arbeitnow.com/api/job-board-api?page=1&search=${updatedtext}&sort_by=relevance&category=&tags=%5B%22developer%22${string}%5D&locale=en`);
+    const result = await response.json();
+    
+    setJobs(result.data);
+    setIsLoading(false);
+  }
+
+  const searchJobs = (e) => {
+    setSearchString(e.target.value);
+    filterJobsByTags();
   }
 
   return (
     <div className="App">      
-      <nav>
-        <h1>Job Portal</h1>
-      </nav>
+      <Nav isLoading={isLoading}/>
       <div className='main-container'>
-        <div className='sidebar'>
-          <label>Language</label>
-          <ul>
-            <li>JS</li>
-            <li>Python</li>
-            <li>Java</li>
-          </ul>
-          <label>Sponsorship</label>
-          <ul>
-            <li>Yes</li>
-          </ul>
-          <label>Tags</label>
-          <ul>
-            <li>Developer</li>
-            <li>English</li>
-            <li>Remote</li>
-          </ul>
-        </div>
+        <Sidebar tags={tags} searchJobs={searchJobs} searchString={searchString} addOrRemoveItemToFilter={addOrRemoveItemToFilter}/>
         <div className='joblist'>
           {jobs?.map(job => {
-            return <Job key={job.slug} types={job.job_types} tags={job.tags} location={job.location} company={job.company_name} title={job.title} remote={job.remote} description={job.description} url={job.url} posted={job.created_at}/>            
+            return <Job selectJob={() => setSelectedJob(job)} key={job.slug} types={job.job_types} tags={job.tags} location={job.location} company={job.company_name} title={job.title} remote={job.remote} description={job.description} url={job.url} posted={job.created_at}/>            
           })}
         </div>
-        <div className='jobview'>
-          <h3>Software Engineer</h3>
-          <p>Berlin</p>
-          <p dangerouslySetInnerHTML={{__html : jobs[0]?.description}}></p>
-        </div>
+        <JobView job={selectedJob ? selectedJob : jobs[0]}/>
       </div>
     </div>
   );

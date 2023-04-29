@@ -23,10 +23,12 @@ function JobView({job}) {
   return (
     <div className='jobview'>
       {/* <button onClick={translate}>English</button> */}
-      <h3>{job?.title}</h3>
-      <p>{job?.location}</p>
-      <a className='btn' href={job?.url}>Apply</a>
-      <p dangerouslySetInnerHTML={{__html : job?.description}}></p>
+      <div className='jobview-header'>
+        <h3>{job?.title}</h3>
+        <p>{job?.location}</p>
+        <a className='btn' href={job?.url}>Apply</a>
+      </div>
+      <p className='jobview-content' dangerouslySetInnerHTML={{__html : job?.description}}></p>
     </div>
   )
 }

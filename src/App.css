@@ -12,42 +12,12 @@ nav{
 
 }
 
-.sidebar{
-    padding: 10px;
-    /* background-color: #f7ede2; */
-    margin: 5px;
-    border-radius: 10px;
-    border: 1px solid #d2d2d2;
-    /* box-shadow: 1px 1px 5px rgba(0,0,0,0.5); */
-}
-
 .joblist{
     /* background-color: bisque; */
-    padding: 10px;
+    /* padding: 10px; */
     max-width: 100%;
     overflow-y: auto;
 }
 
-.jobview{
-    padding: 10px;
-    /* background-color:#f7ede2; */
-    overflow-y: auto;
-    border: 1px solid #d0d0d0;
-    border-radius: 10px;
-    margin: 10px;
-    /* box-shadow: 3px 5px 5px rgba(0,0,0,0.5); */
-}
-
 /* core */
-.sidebar ul{
-    list-style-type: none;
-}
 
-.tag-list li{
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-.tag-list li:hover{
-    color: aquamarine;
-}

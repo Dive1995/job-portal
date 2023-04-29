@@ -6,7 +6,7 @@ function Job({company, title, remote, location, tags, posted, types, url, select
   return (
     <div onClick={selectJob} className='job' key={posted*1000}>
         <p className='job-title'>{title}</p>
-        <ul className='tags'>
+        <ul className='type'>
             {types?.map(type => {
                 return <li>{type}</li>     
             })}

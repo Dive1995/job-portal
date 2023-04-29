@@ -27,21 +27,27 @@
     text-align: right;
 }
 
-.tags{
+.tags, .type{
     list-style-type: none;
     display: flex;
 }
 
-.tags{
+.tags, .type{
     padding: 0;
 }
 
-.tags li{
+.tags li, .type li{
     font-size: 13px;
     padding:5px 8px;
     margin-right: 5px;
-    background-color: #f4edea;
     border-radius: 20px;
     min-width: 50px;
     text-align: center;
+}
+.tags li{
+    background-color: #f4edea;
+}
+
+.type li{
+    background-color: #efd7cd;
 }

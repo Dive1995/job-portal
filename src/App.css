@@ -1,14 +1,9 @@
-nav{
-    background-color: #b5e2fa;
-    padding: 10px;
-    /* box-shadow: 2px 3px 5px rgba(0,0,0,0.5); */
-}
-
 .main-container{
     /* background-color: aliceblue; */
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 2fr 3fr;
+    position: relative;
 
 }
 
@@ -17,7 +12,40 @@ nav{
     /* padding: 10px; */
     max-width: 100%;
     overflow-y: auto;
+    margin-bottom: 10px;
 }
 
-/* core */
+/* 
+mobile - 480
+ipad - 768
+laptop - 1024 
+large monitor - 1200
+*/
 
+
+@media (max-width: 820px) {
+    .sidebar{
+        display: none;
+    }
+    .main-container{
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar{
+        display: none;
+    }
+    .main-container{
+        grid-template-columns: 1fr;
+    }
+    .jobview{
+        /* grid-column: 0 / 3; */
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: #fff;
+        overflow-y: auto;
+        /* margin: 30px; */
+    }   
+}

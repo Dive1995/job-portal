@@ -1,12 +1,13 @@
 import React from 'react'
 import './Nav.css'
-import Loading from '../Loading'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-function Nav({isLoading}) {
+function Nav() {
   return (
     <nav>
-        <h1>Job Portal</h1>
-        {isLoading && <Loading/>}
+        <h1>Job Portal</h1>        
+        <FontAwesomeIcon className='open-sidebar' icon={faBars}/>
       </nav>
   )
 }

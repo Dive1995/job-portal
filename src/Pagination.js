@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './Pagination.css'
 
 function Pagination({setCurrentPageNum}) {
   const [currentPage, setCurrentPage] = useState(1);  

@@ -1,6 +1,8 @@
 import React from 'react'
 import moment from 'moment'
 import './Job.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationPin, faBuilding } from '@fortawesome/free-solid-svg-icons'
 
 function Job({company, title, remote, location, tags, posted, types, url, selectJob}) {
   return (
@@ -11,8 +13,8 @@ function Job({company, title, remote, location, tags, posted, types, url, select
                 return <li>{type}</li>     
             })}
         </ul>
-        <p className='job-company'>{company} {remote ? "( Remote )" : ""}</p>
-        <p className='job-location'>{location}</p>
+        <p className='job-company'><FontAwesomeIcon icon={faBuilding}/> {company} {remote ? "( Remote )" : ""}</p>
+        <p className='job-location'><FontAwesomeIcon icon={faLocationPin}/> {location}</p>
         <ul className='tags'>
             {tags?.map(tag => {
                 return <li>{tag}</li>     

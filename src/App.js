@@ -5,6 +5,8 @@ import Nav from './Components/Nav';
 import Sidebar from './Components/Sidebar';
 import JobView from './Components/JobView';
 import Pagination from './Pagination';
+import Loading from './Loading';
+import Footer from './Footer';
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -19,7 +21,6 @@ function App() {
   const [pageReqNum, setPageReqNum] = useState(1);
 
   useEffect(() => {
-    console.log("Current page: ",currentPage)
     paginateJobs();
   }, [currentPage]);
   
@@ -44,6 +45,10 @@ function App() {
       var newFilter = filters.filter(item => item !== tag.name)
       updateTagsArray(tag);
       setFilters(newFilter);
+    }
+
+    if(pageReqNum === 1|| currentPage === 1){
+      filterJobsByTags();
     }
 
     setPageReqNum(1);
@@ -74,8 +79,6 @@ function App() {
 
     var text = searchString.replaceAll(',', '%2C');    
     var updatedtext = text.replaceAll(' ', '+')
-    // console.log(searchString)
-    // console.log(updatedtext)
     
     const response = await fetch(`https://www.arbeitnow.com/api/job-board-api?page=${pageReqNum}&search=${updatedtext}&sort_by=relevance&category=developer&tags=%5B%22english+speaking%22${string}%5D&locale=en`);
     const result = await response.json();
@@ -86,31 +89,42 @@ function App() {
 
   const searchJobs = (e) => {
     setSearchString(e.target.value);    
+    if(pageReqNum === 1|| currentPage === 1){
+      filterJobsByTags();
+    }
     setPageReqNum(1);
-    setCurrentPage(1);
+    setCurrentPage(1);    
   }
 
   const paginateJobs = () => {
     if(currentPage % 10 === 0){
-      console.log("Need to request server ")
       setPageReqNum(prev => prev + 1);
     }
     setCurrentPageJobs(jobs.slice((currentPage*jobsPerPage - 10), (currentPage*jobsPerPage)));    
   }
 
+  const closeJobView = () => {
+    setSelectedJob(null);
+  }
+
   return (
     <div className="App">      
-      <Nav isLoading={isLoading}/>
+      <Nav/>
+      {isLoading && <Loading/>}
       <div className='main-container'>
         <Sidebar tags={tags} searchJobs={searchJobs} searchString={searchString} addOrRemoveItemToFilter={addOrRemoveItemToFilter}/>
+
         <div className='joblist'>
           {currentPageJobs?.map(job => {
             return <Job selectJob={() => setSelectedJob(job)} key={job.slug} types={job.job_types} tags={job.tags} location={job.location} company={job.company_name} title={job.title} remote={job.remote} description={job.description} url={job.url} posted={job.created_at}/>            
           })}
+
           <Pagination setCurrentPageNum={setCurrentPage}/>
         </div>
-        <JobView job={selectedJob ? selectedJob : jobs[0]}/>
+
+        {selectedJob && <JobView close={closeJobView} job={selectedJob ? selectedJob : jobs[0]}/>}
       </div>
+      <Footer/>
     </div>
   );
 }
